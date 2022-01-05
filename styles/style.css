@@ -1,5 +1,8 @@
+body {
+    font-size: 1.25rem;
+}
+
 #canvas {
-    border: 5px solid #000;
     position: absolute;
     top: 50%;
     left: 50%;
