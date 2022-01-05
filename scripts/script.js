@@ -63,7 +63,7 @@ let excludedGuessedNumbers = []
 let excludedWrittenNumbers = []
 let disabledGuessedButtons = []
 let disabledWrittingButtons = []
-let countdown = 3
+let countdown = 4
 let playerOne = {
     turn: true,
     score: 0,
