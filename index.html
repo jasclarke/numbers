@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+    <head>
+        <title>Numbers</title>
+        <link rel="stylesheet" href="styles/style.css"/>
+        <link rel="stylesheet" href="styles/modal.css">
+    </head>
+
+    <body>
+        <div id="game-board">
+            <div id="grid">
+                <span id="first">Player 1</span>
+                <span></span>
+                <span>Player 2</span>
+                <span id="player-one-ones">1111</span>
+                <div id="num-separator"></div>
+                <span id="player-two-ones">1111</span>
+                <span id="player-one-twos">2222</span>
+                <span id="player-two-twos">2222</span>
+                <span id="player-one-threes">3333</span>
+                <span id="player-two-threes">3333</span>
+                <span id="player-one-fours">4444</span>
+                <span id="player-two-fours">4444</span>
+                <span id="player-one-fives">5555</span>
+                <span id="player-two-fives">5555</span>
+                <span id="player-one-sixes">6666</span>
+                <span id="player-two-sixes">6666</span>
+                <span id="player-one-sevens">7777</span>
+                <span id="player-two-sevens">7777</span>
+                <span id="player-one-eights">8888</span>
+                <span id="player-two-eights">8888</span>
+                <span id="player-one-nines">9999</span>
+                <span id="player-two-nines">9999</span>
+            </div>
+
+            <hr id="h-separator"/>
+            
+            <div id="controls">
+                <button id="num-modal-btn">Select Number</button>
+            </div>
+        </div>
+        
+        <div class="modal-container" id="num-modal">
+            <div class="modal-data">
+                <div id="number-btns">
+                    <button id="one-btn" class="num-btns">1</button>
+                    <button id="two-btn" class="num-btns">2</button>
+                    <button id="three-btn" class="num-btns">3</button>
+                    <button id="four-btn" class="num-btns">4</button>
+                    <button id="five-btn" class="num-btns">5</button>
+                    <button id="six-btn" class="num-btns">6</button>
+                    <button id="seven-btn" class="num-btns">7</button>
+                    <button id="eight-btn" class="num-btns">8</button>
+                    <button id="nine-btn" class="num-btns">9</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-container" id="round-modal">
+            <div class="modal-data">
+                <p id="round-details"></p>
+                <button id="close-btn">Ok</button>
+            </div>
+        </div>
+
+        <div class="modal-container" id="game-over-modal">
+            <div class="modal-data">
+                <p id="game-details"></p>
+                <button id="new-game-btn">Play Again</button>
+            </div>
+        </div>
+
+        <canvas id="canvas"></canvas>
+        <script src="scripts/script.js"></script>
+        <script src="scripts/modal.js"></script>
+    </body>
+</html>
