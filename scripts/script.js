@@ -271,6 +271,7 @@ function guessNumber(number) {
     } else {
         playerOne.turn = true
         playerTwo.turn = false
+        numModalBtn.innerHTML = `Draw Number`
         roundDetails.innerHTML = `Nicely done! <br/> You guessed ${number} and player Two wrote ${writtenNum}`
         openModal(roundModal)
     } 
@@ -294,6 +295,7 @@ function aiGuessNumber() {
     } else {
         playerOne.turn = false
         playerTwo.turn = true
+        numModalBtn.innerHTML = `Guess Number`
         roundDetails.innerHTML = `Yikes! <br/> You wrote ${writtenNum} and player Two guessed ${guessedNumber}`
         openModal(roundModal)
     }
