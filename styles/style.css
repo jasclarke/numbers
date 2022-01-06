@@ -64,7 +64,7 @@ body {
 
 @media only screen and (max-width: 768px) {
     body {
-        font-size: 3rem;
+        font-size: 48px;
     }
 
     #canvas {
