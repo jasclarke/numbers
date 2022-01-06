@@ -63,15 +63,7 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-    body {
-        font-size: 48px;
-    }
-
     #canvas {
-        top: 70%;
-    }
-
-    #game-board {
-        top: 40%
+        top: 60%;
     }
 }
