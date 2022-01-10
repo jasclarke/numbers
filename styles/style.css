@@ -6,6 +6,13 @@
     font-style: normal;
 }
 
+html {
+    border: 10px solid #ff9505;
+    background-color: #044389;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
 body {
     font-family: 'merkinregular';
     color: #fff;
@@ -43,9 +50,6 @@ button {
 
 #game-board {
     text-align: center;
-    border: 10px solid #ff9505;
-    background-color: #044389;
-    min-height: 100vh;
 }
 
 #score-board {
