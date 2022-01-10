@@ -1,16 +1,40 @@
+@font-face {
+    font-family: 'merkinregular';
+    src: url('../fonts/merkin.regular-webfont.woff2') format('woff2'),
+         url('../fonts/merkin.regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-size: 1.25rem;
+    font-family: 'merkinregular';
+    color: #fff;
     overflow-x: hidden;
     overflow-y: hidden;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+button {
+    background-color: #0c8346;
+    color: #fff;
+    font-family: 'merkinregular';
+    font-size: 1.25rem;
+    border: none;
+    padding: 5px 21px;
 }
 
 #canvas {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
 }
 
 #controls {
@@ -18,43 +42,64 @@ body {
 }
 
 #game-board {
-    position: absolute;
-    top: 38%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+    text-align: center;
+    border: 10px solid #ff9505;
+    background-color: #044389;
+    min-height: 100vh;
+}
+
+#score-board {
+    text-align: right;
+    margin: 5px 10px 5px;
+    font-size: 0.75rem;
 }
 
 #h-separator {
-    border: 2px solid #000;
+    border: 2px solid #ff9505;
     border-radius: 5px;
-    background-color: #000;
+    background-color: #ff9505;
     width: 400px;
 }
 
-#grid {
-    display: grid;
-    grid-template-columns: 49% 2% 49%;
-    grid-template-rows: auto;
-    justify-items: center;
-    row-gap: 10px;
+#flex-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 1rem;
 }
 
-#first {
-    grid-row: 1;
+#player-one-name, #player-two-name {
+    color: #ff9505;
 }
 
-#player-one-ones {
-    grid-row: 2;
+#player-one-numbers {
+    text-align: right;
+}
+
+#player-two-numbers {
+    text-align: left;
+}
+
+.player-numbers span {
+    display: block;
+    margin-top: 10px;
+}
+
+.player-numbers span:not(#player-one-name, #player-two-name) {
+    letter-spacing: 5px;
 }
 
 #num-separator {
-    border: 2px solid #000;
+    border: 2px solid #ff9505;
     border-radius: 5px;
-    background-color: #000;
+    background-color: #ff9505;
     width: 0;
     height: auto;
-    grid-row: 2/11;
+    margin: 36px 36px 0;
+}
+
+#num-modal .modal-data, #round-modal .modal-data, #game-over-modal .modal-data {
+    background-color: #ff9505;
 }
 
 #number-btns {
@@ -62,10 +107,50 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 10px;
     row-gap: 10px;
+    margin-top: 30px;
+}
+
+#num-modal-btn {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#player-one-ones, #player-two-ones {
+    letter-spacing: 9px !important;
+}
+
+#player-one-twos, #player-two-twos {
+    letter-spacing: 5.5px !important;
+}
+
+#player-one-threes, #player-two-threes {
+    letter-spacing: 6px !important;
+}
+
+#player-one-fives, #player-two-fives {
+    letter-spacing: 6.5px !important;
+}
+
+#player-one-sixes, #player-two-sixes {
+    letter-spacing: 5.5px !important;
+}
+
+#player-one-sevens, #player-two-sevens {
+    letter-spacing: 6.5px !important;
+}
+
+#player-one-eights, #player-two-eights {
+    letter-spacing: 5.5px !important;
+}
+
+#player-one-nines, #player-two-nines {
+    letter-spacing: 5.5px !important;
 }
 
 @media only screen and (max-width: 768px) {
     #canvas {
-        top: 55%;
+        top: 45%;
     }
 }

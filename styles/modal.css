@@ -3,7 +3,7 @@
 }
 
 .modal-container {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(211, 211, 211, 0.4);
     position: fixed;
     display: flex;
     align-items: flex-start;
@@ -29,7 +29,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     width: 300px;
     max-width: 100%;
-    padding: 30px 50px;
+    padding: 20px 50px;
     margin-top: 30px;
     text-align: center;
 }

@@ -1,13 +1,15 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-const CANVAS_WIDTH = canvas.width = 600
-const CANVAS_HEIGHT = canvas.height = 600
+const CANVAS_WIDTH = canvas.width = 500
+const CANVAS_HEIGHT = canvas.height = 500
 
 const handImage = new Image()
 handImage.src = 'images/hand.png'
-const spriteWidth = 115
-const spriteHeight = 126
+const spriteWidth = 54
+const spriteHeight = 60
+const body = document.getElementById('body')
+const playerScore = document.getElementById('player-score')
 const closeBtn = document.getElementById('close-btn')
 const numInput = document.getElementById('num-input')
 const newGameBtn = document.getElementById('new-game-btn')
@@ -47,8 +49,8 @@ const eightBtn =  document.getElementById('eight-btn')
 const nineBtn = document.getElementById('nine-btn')
 const numBtns = document.getElementsByClassName('num-btns')
 
-let startXAxis = 243
-let startYAxis = 450
+let startXAxis = 225
+let startYAxis = 375
 let xAxis = 0
 let yAxis = 0
 let speed = 5
@@ -128,8 +130,8 @@ function load() {
 }
 
 function resetHand() {
-    startXAxis = 243
-    startYAxis = 450
+    startXAxis = 225
+    startYAxis = 375
     xAxis = 0
     yAxis = 0
     speed = 5
@@ -262,17 +264,17 @@ function guessNumber(number) {
         if (playerTwo[numWord] === 4) excludedWrittenNumbers.push(writtenNum)
         strikeNumber(2, writtenNum, playerTwo[numWord])
         if (playerTwo.score !== 35) {
-            roundDetails.innerHTML = `Better luck next time! <br/> You guessed ${number} and player Two wrote ${writtenNum}`
+            roundDetails.innerHTML = `Better luck next time! <br/> You guessed ${number} and AI wrote ${writtenNum}`
             openModal(roundModal)
         } else {
-            gameDetails.innerHTML = `Player Two Won. Try Again!`
+            gameDetails.innerHTML = `AI Won. Try Again!`
             openModal(gameOverModal)
         }
     } else {
         playerOne.turn = true
         playerTwo.turn = false
         numModalBtn.innerHTML = `Draw Number`
-        roundDetails.innerHTML = `Nicely done! <br/> You guessed ${number} and player Two wrote ${writtenNum}`
+        roundDetails.innerHTML = `<h2>Nicely done!</h2> <p>You guessed ${number} and AI wrote ${writtenNum}</p>`
         openModal(roundModal)
     } 
 }
@@ -283,10 +285,11 @@ function aiGuessNumber() {
     if (guessedNumber !== parseInt(writtenNum)) {
         playerOne[numWord] += 1
         playerOne.score += 1
+        playerScore.innerHTML = playerOne.score
         if (playerOne[numWord] === 4) excludedGuessedNumbers.push(writtenNum)
         strikeNumber(1, writtenNum, playerOne[numWord])
         if (playerOne.score !== 35) {
-            roundDetails.innerHTML = `Nicely done! <br/> You wrote ${writtenNum} and player Two guessed ${guessedNumber}`
+            roundDetails.innerHTML = `<h2>Nicely done!</h2> <p>You wrote ${writtenNum} and AI guessed ${guessedNumber}</p>`
             openModal(roundModal)
         } else {
             gameDetails.innerHTML = `Congrats You Won!`
@@ -296,7 +299,7 @@ function aiGuessNumber() {
         playerOne.turn = false
         playerTwo.turn = true
         numModalBtn.innerHTML = `Guess Number`
-        roundDetails.innerHTML = `Yikes! <br/> You wrote ${writtenNum} and player Two guessed ${guessedNumber}`
+        roundDetails.innerHTML = `Yikes! <br/> You wrote ${writtenNum} and AI guessed ${guessedNumber}`
         openModal(roundModal)
     }
 }
@@ -730,4 +733,5 @@ function one() {
     return false
 }
 
+//body.requestFullscreen().then( () => console.log('fullscreen')).catch( (error) => console.log(error.message))
 load()
