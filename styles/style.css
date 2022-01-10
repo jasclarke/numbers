@@ -153,4 +153,8 @@ button {
     #canvas {
         top: 45%;
     }
+
+    #h-separator {
+        width: 80%;
+    }
 }
