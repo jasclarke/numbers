@@ -1,14 +1,28 @@
 <!DOCTYPE html>
+
+<html lang="en" id="html-game-board" class="orange-background">
     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Numbers</title>
+        <title>Menu</title>
         <link rel="stylesheet" href="styles/style.css"/>
         <link rel="stylesheet" href="styles/modal.css">
     </head>
 
-    <body id="body">
-        <div id="game-board">
-            <p id="score-board">Score: <span id="player-score">0</span></p>
+    <body>
+        <div class="text-center" id="menu">
+            <h1>Numbers</h1>
+            <p>If you know you know</p>
+            <button class="menu-buttons" id="start-game-button">Start Game</button>
+            <button class="menu-buttons" id="settings-button">Settings</button>
+        </div>
+
+        <div class="text-center remove-page" id="game">
+            <div id="game-indicators">
+                <button id="quit-button">Quit</button>
+                <span id="score-board">Score: <span id="player-score">0</span></span>
+            </div>
             <div id="flex-numbers">
                 <div id="player-one-numbers" class="player-numbers">
                     <span id="player-one-name">Player 1</span>
@@ -76,9 +90,9 @@
                 <button id="new-game-btn">Play Again</button>
             </div>
         </div>
-
         
         <script src="scripts/script.js"></script>
         <script src="scripts/modal.js"></script>
+        <script src="scripts/menu.js"></script>
     </body>
 </html>

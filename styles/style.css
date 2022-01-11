@@ -7,8 +7,6 @@
 }
 
 html {
-    border: 10px solid #ff9505;
-    background-color: #044389;
     min-height: 100vh;
     min-height: -webkit-fill-available;
 }
@@ -19,6 +17,11 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
     margin: 0;
+}
+
+h1 {
+    font-size: 5rem;
+    color: #044389;
 }
 
 h2 {
@@ -44,18 +47,40 @@ button {
     height: 600px;
 }
 
-#controls {
+.remove-page {
+    display: none;
+}
+
+.blue-background {
+    border: 10px solid #ff9505;
+    background-color: #044389;
+}
+
+.orange-background {
+    background-color: #ff9505;
+}
+
+.menu-buttons {
+    display: block;
+    margin: 25px auto;
+    width: 200px;
+    height: 60px;
+}
+
+.text-center {
     text-align: center;
 }
 
-#game-board {
-    text-align: center;
-}
-
-#score-board {
-    text-align: right;
-    margin: 5px 10px 5px;
+#game-indicators {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 5px;
     font-size: 0.75rem;
+}
+
+#quit-button {
+    font-size: 0.5rem;
+    background-color: #e84855;
 }
 
 #h-separator {
