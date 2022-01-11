@@ -6,7 +6,7 @@ const menu = document.getElementById('menu')
 const game = document.getElementById('game')
 
 startGameButton.addEventListener('click', () => {
-    menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
+    //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
     menu.classList.add('remove-page')
     htmlGameBoard.classList.remove('orange-background')
     htmlGameBoard.classList.add('blue-background')
@@ -14,7 +14,7 @@ startGameButton.addEventListener('click', () => {
 })
 
 quitButton.addEventListener('click', () => {
-    document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
+    //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
     game.classList.add('remove-page')
     htmlGameBoard.classList.remove('blue-background')
     htmlGameBoard.classList.add('orange-background')
