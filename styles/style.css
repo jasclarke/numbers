@@ -29,6 +29,19 @@ h2 {
     letter-spacing: 1px;
 }
 
+h3 {
+    font-size: 1rem;
+}
+
+label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 35px;
+    margin-bottom: 5px;
+}
+
 button {
     background-color: #0c8346;
     color: #fff;
@@ -36,6 +49,12 @@ button {
     font-size: 1.25rem;
     border: none;
     padding: 5px 21px;
+    cursor: pointer;
+}
+
+::placeholder {
+    font-family: 'merkinregular';
+    color: #fff;
 }
 
 #canvas {
@@ -69,6 +88,63 @@ button {
 
 .text-center {
     text-align: center;
+}
+
+.regular-button {
+    margin-top: 20px;
+    width: 165px;
+}
+
+.settings {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.settings-radio {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    display: inline-block; 
+    background-color: transparent;
+    border: 5px solid #044389;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.hide-radio {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    cursor: pointer;
+}
+
+.hide-radio:checked ~ .settings-radio {
+    background-color: #0c8346;
+}
+
+.hide-radio:hover ~ .settings-radio {
+    background-color: #0c8346;
+    opacity: 0.4;
+}
+
+#player-name {
+    background-color: #044389;
+    border: 0;
+    height: 50px;
+    width: 200px;
+    font-family: 'merkinregular';
+    color: #fff;
+}
+
+#player-name:focus {
+    outline: none;
+    border: 3px solid #0c8346;
+}
+
+#settings-heading {
+    margin-top: 0px;
 }
 
 #game-indicators {
@@ -178,7 +254,7 @@ button {
     letter-spacing: 5.5px !important;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     h1 {
         font-size: 3.5rem;
     }
