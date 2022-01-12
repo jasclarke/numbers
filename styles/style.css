@@ -266,4 +266,12 @@ button {
     #h-separator {
         width: 80%;
     }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
+        font-size: 1rem;
+    }
 }
