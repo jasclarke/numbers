@@ -48,12 +48,27 @@ const sevenBtn = document.getElementById('seven-btn')
 const eightBtn =  document.getElementById('eight-btn')
 const nineBtn = document.getElementById('nine-btn')
 const numBtns = document.getElementsByClassName('num-btns')
+const fastSetting = document.getElementById('fast')
+const fasterSetting = document.getElementById('faster')
+const fastestSetting = document.getElementById('fastest')
+const noviceSetting = document.getElementById('novice')
+const intermediateSetting = document.getElementById('intermediate')
+const expertSetting = document.getElementById('expert')
+const htmlGameBoard = document.getElementById('html-game-board')
+const startGameButton = document.getElementById('start-game-button')
+const quitButton = document.getElementById('quit-button')
+const settingsButton = document.getElementById('settings-button')
+const confirmSettingsButton = document.getElementById('confirm-settings-button')
+const menu = document.getElementById('menu')
+const game = document.getElementById('game')
+const settings = document.getElementById('settings')
 
 let startXAxis = 225
 let startYAxis = 375
 let xAxis = 0
 let yAxis = 0
-let speed = 5
+let speed = 3
+let difficulity = 0
 let bezierDrawProgress = 0
 let bezierDrawSpeed = 0.1
 let stroke = 0
@@ -120,13 +135,133 @@ closeBtn.addEventListener('click', () => {
 
 newGameBtn.addEventListener('click', () => newGame())
 
+startGameButton.addEventListener('click', () => {
+    //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
+    menu.classList.add('remove-page')
+    htmlGameBoard.classList.remove('orange-background')
+    htmlGameBoard.classList.add('blue-background')
+    game.classList.remove('remove-page')
+    let config = JSON.parse(localStorage.getItem('settings'))
+    setSpeed(config.speed)
+    difficulity = parseInt(config.difficulity)
+    console.log(speed, bezierDrawSpeed)
+})
+
+quitButton.addEventListener('click', () => {
+    //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
+    game.classList.add('remove-page')
+    htmlGameBoard.classList.remove('blue-background')
+    htmlGameBoard.classList.add('orange-background')
+    menu.classList.remove('remove-page')
+})
+
+settingsButton.addEventListener('click', () => {
+    menu.classList.add('remove-page')
+    settings.classList.remove('remove-page')
+})
+
+confirmSettingsButton.addEventListener('click', () => {
+    let config = {
+        speed: getRadioValueByName('hand-speed'),
+        difficulity: getRadioValueByName('ai-guessing-ability')
+    }
+
+    localStorage.setItem('settings', JSON.stringify(config))
+    settings.classList.add('remove-page')
+    menu.classList.remove('remove-page')
+})
+
 function newGame() {
     location.reload()
 }
 
 function load() {
+    configureSettings()
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
     handImage.onload = () => ctx.drawImage(handImage, xAxis + startXAxis, yAxis + startYAxis, spriteWidth, spriteHeight)
+}
+
+function getRadioValueByName(name) {
+    let radioGroup = document.getElementsByName(name) 
+
+    for (let index = 0; index < radioGroup.length; index++) {
+        
+        if (radioGroup[index].checked) {
+            return radioGroup[index].value
+            break
+        } 
+    }
+
+    return 3
+}
+
+const setSpeed = (speedValue) => {
+    switch (parseInt(speedValue)) {
+        case 0:
+            speed = 2
+            bezierDrawSpeed = 0.05
+            break
+        case 1:
+            speed = 5
+            bezierDrawSpeed = 0.1
+            break
+        case 2:
+            speed = 6
+            bezierDrawSpeed = 0.2
+            break
+        default:
+            break;
+    }
+}
+
+const configureSettings = () => {
+    let settings = JSON.parse(localStorage.getItem('settings'))
+
+    if (settings) {
+        speed = settings.speed
+        difficulity = settings.difficulity
+    } else {
+        settings = {
+            speed: 1,
+            difficulity: 0
+        }
+
+        localStorage.setItem('settings', JSON.stringify(settings))
+    }
+
+    setRadioInputs(settings)
+}
+
+const setRadioInputs = (settings) => {
+    switch (parseInt(settings.speed)) {
+        case 0:
+            fastSetting.checked = true
+            break;
+        case 1:
+            fasterSetting.checked = true
+            break;
+        case 2:
+            fastestSetting.checked = true
+            break;
+        default:
+            console.log('error')
+            break;
+    }
+
+    switch (parseInt(settings.difficulity)) {
+        case 0:
+            noviceSetting.checked = true
+            break;
+        case 1:
+            intermediateSetting.checked = true
+            break;
+        case 2:
+            expertSetting.checked = true
+            break;
+        default:
+            console.log('error')
+            break;
+    }
 }
 
 function resetHand() {
@@ -134,10 +269,8 @@ function resetHand() {
     startYAxis = 375
     xAxis = 0
     yAxis = 0
-    speed = 5
     stroke = 0
     bezierDrawProgress = 0
-    bezierDrawSpeed = 0.1
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
     handImage.onload = () => ctx.drawImage(handImage, startXAxis, startYAxis, spriteWidth, spriteHeight)
 }
@@ -318,6 +451,13 @@ function educatedGuess(excluded) {
         return randomElementFromArray(numberOptions)
     } else {
         let availableNumbers = numberList.filter( num => excluded.every( n => parseInt(num) !== parseInt(n)))
+        /**
+         * Extract a certain amount of numbers except the correct number to an array
+         * Add number to the array
+         * randomise the array using sort
+         * send the array to the random function
+         * 
+         */
         return randomElementFromArray(availableNumbers)
     }
 }
@@ -464,7 +604,6 @@ function bezierPath(points) {
     let t = bezierDrawProgress
 
     bezierDrawProgress += bezierDrawSpeed
-    
     if (bezierDrawProgress > 1) {
         startXAxis = xAxis
         startYAxis = yAxis
@@ -655,7 +794,7 @@ function three() {
 
         bezierPath(points)
         
-        if (bezierDrawProgress >= 0.99) {
+        if (bezierDrawProgress >= 0.95) {
             stroke = 1
             startXAxis = xAxis
             startYAxis = yAxis
