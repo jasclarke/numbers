@@ -265,6 +265,10 @@ button {
     h1 {
         font-size: 3.5rem;
     }
+
+    .hide-radio:hover ~ .settings-radio {
+        opacity: 1;
+    }
     
     #canvas {
         top: 45%;
