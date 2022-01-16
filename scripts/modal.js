@@ -1,7 +1,7 @@
 function openModal(identifier) {
-    identifier.classList.add('show')
+    document.getElementById(identifier).classList.add('show')
 }
 
 function closeModal(identifier) {
-    identifier.classList.remove('show')
+    document.getElementById(identifier).classList.remove('show')
 }

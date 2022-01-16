@@ -8,46 +8,12 @@ const handImage = new Image()
 handImage.src = 'images/hand.png'
 const spriteWidth = 54
 const spriteHeight = 60
+
 const body = document.getElementById('body')
-const playerScore = document.getElementById('player-score')
 const closeBtn = document.getElementById('close-btn')
-const numInput = document.getElementById('num-input')
 const newGameBtn = document.getElementById('new-game-btn')
-const numModalBtn = document.getElementById('num-modal-btn')
-const numModal = document.getElementById('num-modal')
-const roundModal = document.getElementById('round-modal')
-const gameOverModal = document.getElementById('game-over-modal')
 const roundDetails = document.getElementById('round-details')
 const gameDetails = document.getElementById('game-details')
-const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-const playerOneOnes = document.getElementById('player-one-ones')
-const playerOneTwos = document.getElementById('player-one-twos')
-const playerOneThrees = document.getElementById('player-one-threes')
-const playerOneFours = document.getElementById('player-one-fours')
-const playerOneFives = document.getElementById('player-one-fives')
-const playerOneSixes = document.getElementById('player-one-sixes')
-const playerOneSevens = document.getElementById('player-one-sevens')
-const playerOneEights = document.getElementById('player-one-eights')
-const playerOneNines = document.getElementById('player-one-nines')
-const playerTwoOnes = document.getElementById('player-two-ones')
-const playerTwoTwos = document.getElementById('player-two-twos')
-const playerTwoThrees = document.getElementById('player-two-threes')
-const playerTwoFours = document.getElementById('player-two-fours')
-const playerTwoFives = document.getElementById('player-two-fives')
-const playerTwoSixes = document.getElementById('player-two-sixes')
-const playerTwoSevens = document.getElementById('player-two-sevens')
-const playerTwoEights = document.getElementById('player-two-eights')
-const playerTwoNines = document.getElementById('player-two-nines')
-const oneBtn = document.getElementById('one-btn')
-const twoBtn = document.getElementById('two-btn')
-const threeBtn = document.getElementById('three-btn')
-const fourBtn = document.getElementById('four-btn')
-const fiveBtn = document.getElementById('five-btn')
-const sixBtn = document.getElementById('six-btn')
-const sevenBtn = document.getElementById('seven-btn')
-const eightBtn =  document.getElementById('eight-btn')
-const nineBtn = document.getElementById('nine-btn')
-const numBtns = document.getElementsByClassName('num-btns')
 const fastSetting = document.getElementById('fast')
 const fasterSetting = document.getElementById('faster')
 const fastestSetting = document.getElementById('fastest')
@@ -56,12 +22,109 @@ const intermediateSetting = document.getElementById('intermediate')
 const expertSetting = document.getElementById('expert')
 const htmlGameBoard = document.getElementById('html-game-board')
 const startGameButton = document.getElementById('start-game-button')
-const quitButton = document.getElementById('quit-button')
 const settingsButton = document.getElementById('settings-button')
 const confirmSettingsButton = document.getElementById('confirm-settings-button')
 const menu = document.getElementById('menu')
-const game = document.getElementById('game')
 const settings = document.getElementById('settings')
+
+const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const game = 'game'
+const playerScore = 'player-score'
+const quitButton = 'quit-button'
+const numModalBtn = 'num-modal-btn'
+const numModal = 'num-modal'
+const roundModal = 'round-modal'
+const gameOverModal = 'game-over-modal'
+const playerOneOnes = 'player-one-ones'
+const playerOneTwos = 'player-one-twos'
+const playerOneThrees ='player-one-threes'
+const playerOneFours = 'player-one-fours'
+const playerOneFives = 'player-one-fives'
+const playerOneSixes = 'player-one-sixes'
+const playerOneSevens = 'player-one-sevens'
+const playerOneEights = 'player-one-eights'
+const playerOneNines = 'player-one-nines'
+const playerTwoOnes = 'player-two-ones'
+const playerTwoTwos = 'player-two-twos'
+const playerTwoThrees = 'player-two-threes'
+const playerTwoFours = 'player-two-fours'
+const playerTwoFives = 'player-two-fives'
+const playerTwoSixes = 'player-two-sixes'
+const playerTwoSevens = 'player-two-sevens'
+const playerTwoEights = 'player-two-eights'
+const playerTwoNines = 'player-two-nines'
+const oneBtn = 'one-btn'
+const twoBtn = 'two-btn'
+const threeBtn = 'three-btn'
+const fourBtn = 'four-btn'
+const fiveBtn = 'five-btn'
+const sixBtn = 'six-btn'
+const sevenBtn = 'seven-btn'
+const eightBtn =  'eight-btn'
+const nineBtn = 'nine-btn'
+const numBtns = 'num-btns'
+
+const gameHtml = `
+<div class="text-center" id="game">
+    <div id="game-indicators">
+        <button id="quit-button">Quit</button>
+        <span id="score-board">Score: <span id="player-score">0</span></span>
+    </div>
+    <div id="flex-numbers">
+        <div id="player-one-numbers" class="player-numbers">
+            <span id="player-one-name">Player 1</span>
+            <span id="player-one-ones">1111</span>
+            <span id="player-one-twos">2222</span>
+            <span id="player-one-threes">3333</span>
+            <span id="player-one-fours">4444</span>
+            <span id="player-one-fives">5555</span>
+            <span id="player-one-sixes">6666</span>
+            <span id="player-one-sevens">7777</span>
+            <span id="player-one-eights">8888</span>
+            <span id="player-one-nines">9999</span>
+        </div>
+        
+        <div id="num-separator"></div>
+
+        <div id="player-two-numbers" class="player-numbers">
+            <span id="player-two-name">AI</span>
+            <span id="player-two-ones">1111</span>
+            <span id="player-two-twos">2222</span>
+            <span id="player-two-threes">3333</span>
+            <span id="player-two-fours">4444</span>
+            <span id="player-two-fives">5555</span>
+            <span id="player-two-sixes">6666</span>
+            <span id="player-two-sevens">7777</span>
+            <span id="player-two-eights">8888</span>
+            <span id="player-two-nines">9999</span>
+        </div>
+    </div>
+
+    <hr id="h-separator"/>
+
+    <canvas id="canvas"></canvas>
+    <button id="num-modal-btn">Write Number</button>
+
+</div>`
+
+const numberModalHtml = `
+
+<div class="modal-container" id="num-modal">
+    <div class="modal-data">
+        <p>Choose a Number</p>
+        <div id="number-btns">
+            <button id="one-btn" class="num-btns">1</button>
+            <button id="two-btn" class="num-btns">2</button>
+            <button id="three-btn" class="num-btns">3</button>
+            <button id="four-btn" class="num-btns">4</button>
+            <button id="five-btn" class="num-btns">5</button>
+            <button id="six-btn" class="num-btns">6</button>
+            <button id="seven-btn" class="num-btns">7</button>
+            <button id="eight-btn" class="num-btns">8</button>
+            <button id="nine-btn" class="num-btns">9</button>
+        </div>
+    </div>
+</div>`
 
 let startXAxis = 225
 let startYAxis = 375
@@ -109,26 +172,10 @@ let playerTwo = {
 }
 window.selectedNum
 
-oneBtn.addEventListener('click', () => processTurn(1))
-twoBtn.addEventListener('click', () => processTurn(2))
-threeBtn.addEventListener('click', () => processTurn(3))
-fourBtn.addEventListener('click', () => processTurn(4))
-fiveBtn.addEventListener('click', () => processTurn(5))
-sixBtn.addEventListener('click', () => processTurn(6))
-sevenBtn.addEventListener('click', () => processTurn(7))
-eightBtn.addEventListener('click', () => processTurn(8))
-nineBtn.addEventListener('click', () => processTurn(9))
-
-numModalBtn.addEventListener('click', () => {
-    [...numBtns].forEach( btn => btn.removeAttribute('disabled'))
-    playerOne.turn ? disableButtons(excludedGuessedNumbers) : disableButtons(excludedWrittenNumbers)
-    openModal(numModal)
-})
-
 closeBtn.addEventListener('click', () => {
     closeModal(roundModal)
     if (playerTwo.turn) {
-        writtenNum = educatedGuess(excludedWrittenNumbers)
+        writtenNum = educatedGuess(excludedWrittenNumbers, 0)
         submitNumber(writtenNum)
     }
 })
@@ -137,22 +184,15 @@ newGameBtn.addEventListener('click', () => newGame())
 
 startGameButton.addEventListener('click', () => {
     //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
+    newGame()
     menu.classList.add('remove-page')
     htmlGameBoard.classList.remove('orange-background')
     htmlGameBoard.classList.add('blue-background')
-    game.classList.remove('remove-page')
+    canvas.classList.remove('remove-page')
+    document.getElementById(game).classList.remove('remove-page')
     let config = JSON.parse(localStorage.getItem('settings'))
     setSpeed(config.speed)
     difficulity = parseInt(config.difficulity)
-    console.log(speed, bezierDrawSpeed)
-})
-
-quitButton.addEventListener('click', () => {
-    //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
-    game.classList.add('remove-page')
-    htmlGameBoard.classList.remove('blue-background')
-    htmlGameBoard.classList.add('orange-background')
-    menu.classList.remove('remove-page')
 })
 
 settingsButton.addEventListener('click', () => {
@@ -171,14 +211,80 @@ confirmSettingsButton.addEventListener('click', () => {
     menu.classList.remove('remove-page')
 })
 
+const loadEventListeners = () => {
+    document.getElementById(oneBtn).addEventListener('click', () => processTurn(1))
+    document.getElementById(twoBtn).addEventListener('click', () => processTurn(2))
+    document.getElementById(threeBtn).addEventListener('click', () => processTurn(3))
+    document.getElementById(fourBtn).addEventListener('click', () => processTurn(4))
+    document.getElementById(fiveBtn).addEventListener('click', () => processTurn(5))
+    document.getElementById(sixBtn).addEventListener('click', () => processTurn(6))
+    document.getElementById(sevenBtn).addEventListener('click', () => processTurn(7))
+    document.getElementById(eightBtn).addEventListener('click', () => processTurn(8))
+    document.getElementById(nineBtn).addEventListener('click', () => processTurn(9))
+
+    document.getElementById('num-modal-btn').addEventListener('click', () => {
+        [...document.getElementsByClassName(numBtns)].forEach( btn => btn.removeAttribute('disabled'))
+        playerOne.turn ? disableButtons(excludedGuessedNumbers) : disableButtons(excludedWrittenNumbers)
+        openModal(numModal)
+    })
+
+    document.getElementById(quitButton).addEventListener('click', () => {
+        //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
+        document.getElementById(game).classList.add('remove-page')
+        canvas.classList.add('remove-page')
+        htmlGameBoard.classList.remove('blue-background')
+        htmlGameBoard.classList.add('orange-background')
+        menu.classList.remove('remove-page')
+        resetScore()
+    })
+}
+
 function newGame() {
-    location.reload()
+    document.getElementById(game).outerHTML = gameHtml
+    document.getElementById(numModal).outerHTML = numberModalHtml
+    loadEventListeners()
 }
 
 function load() {
+    loadEventListeners()
     configureSettings()
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
     handImage.onload = () => ctx.drawImage(handImage, xAxis + startXAxis, yAxis + startYAxis, spriteWidth, spriteHeight)
+}
+
+const resetScore = () => {
+    excludedGuessedNumbers = []
+    excludedWrittenNumbers = []
+    disabledGuessedButtons = []
+    disabledWrittingButtons = []
+
+    playerOne = {
+        turn: true,
+        score: 0,
+        one: 0,
+        two: 0,
+        three: 0,
+        four: 0,
+        five: 0,
+        six: 0,
+        seven: 0,
+        eight: 0,
+        nine: 0
+    }
+
+    playerTwo = {
+        turn: false,
+        score: 0,
+        one: 0,
+        two: 0,
+        three: 0,
+        four: 0,
+        five: 0,
+        six: 0,
+        seven: 0,
+        eight: 0,
+        nine: 0
+    }
 }
 
 function getRadioValueByName(name) {
@@ -290,31 +396,40 @@ function disableButtons(buttonList) {
     buttonList.forEach( number => {
         switch (parseInt(number)) {
             case 1:
-                oneBtn.setAttribute('disabled', '')
+                document.getElementById(oneBtn).setAttribute('disabled', '')
+                document.getElementById(oneBtn).classList.add('disabled-button')
                 break;
             case 2:
-                twoBtn.setAttribute('disabled', '')
+                document.getElementById(twoBtn).setAttribute('disabled', '')
+                document.getElementById(twoBtn).classList.add('disabled-button')
                 break;
             case 3:
-                threeBtn.setAttribute('disabled', '')
+                document.getElementById(threeBtn).setAttribute('disabled', '')
+                document.getElementById(threeBtn).classList.add('disabled-button')
                 break;
             case 4:
-                fourBtn.setAttribute('disabled', '')
+                document.getElementById(fourBtn).setAttribute('disabled', '')
+                document.getElementById(fourBtn).classList.add('disabled-button')
                 break;
             case 5:
-                fiveBtn.setAttribute('disabled', '')
+                document.getElementById(fiveBtn).setAttribute('disabled', '')
+                document.getElementById(fiveBtn).classList.add('disabled-button')
                 break;
             case 6:
-                sixBtn.setAttribute('disabled', '')
+                document.getElementById(sixBtn).setAttribute('disabled', '')
+                document.getElementById(sixBtn).classList.add('disabled-button')
                 break;
             case 7:
-                sevenBtn.setAttribute('disabled', '')
+                document.getElementById(sevenBtn).setAttribute('disabled', '')
+                document.getElementById(sevenBtn).classList.add('disabled-button')
                 break;
             case 8:
-                eightBtn.setAttribute('disabled', '')
+                document.getElementById(eightBtn).setAttribute('disabled', '')
+                document.getElementById(eightBtn).classList.add('disabled-button')
                 break;
             case 9:
-                nineBtn.setAttribute('disabled', '')
+                document.getElementById(nineBtn).setAttribute('disabled', '')
+                document.getElementById(nineBtn).classList.add('disabled-button')
                 break;
             default:
                 break;
@@ -406,19 +521,19 @@ function guessNumber(number) {
     } else {
         playerOne.turn = true
         playerTwo.turn = false
-        numModalBtn.innerHTML = `Draw Number`
+        document.getElementById(numModalBtn).innerHTML = `Draw Number`
         roundDetails.innerHTML = `<h2>Nicely done!</h2> <p>You guessed ${number} and AI wrote ${writtenNum}</p>`
         openModal(roundModal)
     } 
 }
 
 function aiGuessNumber() {
-    let guessedNumber = educatedGuess(excludedGuessedNumbers)
+    let guessedNumber = educatedGuess(excludedGuessedNumbers, difficulity)
 
     if (guessedNumber !== parseInt(writtenNum)) {
         playerOne[numWord] += 1
         playerOne.score += 1
-        playerScore.innerHTML = playerOne.score
+        document.getElementById(playerScore).innerHTML = playerOne.score
         if (playerOne[numWord] === 4) excludedGuessedNumbers.push(writtenNum)
         strikeNumber(1, writtenNum, playerOne[numWord])
         if (playerOne.score !== 35) {
@@ -431,13 +546,13 @@ function aiGuessNumber() {
     } else {
         playerOne.turn = false
         playerTwo.turn = true
-        numModalBtn.innerHTML = `Guess Number`
+        document.getElementById(numModalBtn).innerHTML = `Guess Number`
         roundDetails.innerHTML = `Yikes! <br/> You wrote ${writtenNum} and AI guessed ${guessedNumber}`
         openModal(roundModal)
     }
 }
 
-function educatedGuess(excluded) {
+function educatedGuess(excluded, difficulity) {
     if (playerTwo.turn === true && playerTwo.score >= 26) {
         let finalNumbers = {}
 
@@ -450,16 +565,41 @@ function educatedGuess(excluded) {
         let numberOptions = numberOptionsFilter(finalNumbers, countdown)
         return randomElementFromArray(numberOptions)
     } else {
-        let availableNumbers = numberList.filter( num => excluded.every( n => parseInt(num) !== parseInt(n)))
-        /**
-         * Extract a certain amount of numbers except the correct number to an array
-         * Add number to the array
-         * randomise the array using sort
-         * send the array to the random function
-         * 
-         */
+        let availableNumbers
+
+        switch (parseInt(difficulity)) {
+            case 0:
+                availableNumbers = setAIProbaility(excluded, 9)
+                break
+            case 1: 
+                availableNumbers = setAIProbaility(excluded, 4)
+                break
+            case 2:
+                availableNumbers = setAIProbaility(excluded, 2)
+                break
+            default:
+                console.log('An error occurred! Please email the developers')
+                break
+        }
+        
         return randomElementFromArray(availableNumbers)
     }
+}
+
+const setAIProbaility = (excluded, optionsLimit) => {
+    incorrectNumbers = numberList.filter( num => excluded.every( n => parseInt(num) !== parseInt(n))).filter( num => num !== writtenNum)
+    shuffledIncorrectNumbers = shuffleArrary(incorrectNumbers)
+    
+    while (shuffledIncorrectNumbers.length > optionsLimit) {
+        shuffledIncorrectNumbers.pop()
+    }
+
+    shuffledIncorrectNumbers.push(writtenNum)
+    return shuffleArrary(shuffledIncorrectNumbers)
+}
+
+const shuffleArrary = (array) => {
+    return array.sort( () => 0.5 - Math.random())
 }
 
 function numberOptionsFilter(finalNumbers, score) {
@@ -523,31 +663,31 @@ function strikeNumber(player, number, score) {
     if (player === 1) {
         switch (parseInt(number)) {
             case 1:
-                playerOneOnes.innerHTML = nums
+                document.getElementById(playerOneOnes).innerHTML = nums
                 break;
             case 2:
-                playerOneTwos.innerHTML = nums
+                document.getElementById(playerOneTwos).innerHTML = nums
                 break;
             case 3:
-                playerOneThrees.innerHTML = nums
+                document.getElementById(playerOneThrees).innerHTML = nums
                 break;
             case 4:
-                playerOneFours.innerHTML = nums
+                document.getElementById(playerOneFours).innerHTML = nums
                 break;
             case 5:
-                playerOneFives.innerHTML = nums
+                document.getElementById(playerOneFives).innerHTML = nums
                 break;
             case 6:
-                playerOneSixes.innerHTML = nums
+                document.getElementById(playerOneSixes).innerHTML = nums
                 break;
             case 7:
-                playerOneSevens.innerHTML = nums
+                document.getElementById(playerOneSevens).innerHTML = nums
                 break;
             case 8:
-                playerOneEights.innerHTML = nums
+                document.getElementById(playerOneEights).innerHTML = nums
                 break;
             case 9:
-                playerOneNines.innerHTML = nums
+                document.getElementById(playerOneNines).innerHTML = nums
                 break;
             default:
                 roundDetails.innerHTML = `Opps something went wrong. Please report this to the developers.`
@@ -557,31 +697,31 @@ function strikeNumber(player, number, score) {
     } else {
         switch (parseInt(number)) {
             case 1:
-                playerTwoOnes.innerHTML = nums
+                document.getElementById(playerTwoOnes).innerHTML = nums
                 break;
             case 2:
-                playerTwoTwos.innerHTML = nums
+                document.getElementById(playerTwoTwos).innerHTML = nums
                 break;
             case 3:
-                playerTwoThrees.innerHTML = nums
+                document.getElementById(playerTwoThrees).innerHTML = nums
                 break;
             case 4:
-                playerTwoFours.innerHTML = nums
+                document.getElementById(playerTwoFours).innerHTML = nums
                 break;
             case 5:
-                playerTwoFives.innerHTML = nums
+                document.getElementById(playerTwoFives).innerHTML = nums
                 break;
             case 6:
-                playerTwoSixes.innerHTML = nums
+                document.getElementById(playerTwoSixes).innerHTML = nums
                 break;
             case 7:
-                playerTwoSevens.innerHTML = nums
+                document.getElementById(playerTwoSevens).innerHTML = nums
                 break;
             case 8:
-                playerTwoEights.innerHTML = nums
+                document.getElementById(playerTwoEights).innerHTML = nums
                 break;
             case 9:
-                playerTwoNines.innerHTML = nums
+                document.getElementById(playerTwoNines).innerHTML = nums
                 break;
             default:
                 roundDetails.innerHTML = `Opps something went wrong. Please report this to the developers.`

@@ -64,6 +64,7 @@ button {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
+    z-index: -1;
 }
 
 .remove-page {
@@ -192,6 +193,12 @@ button {
 
 .player-numbers span:not(#player-one-name, #player-two-name) {
     letter-spacing: 5px;
+}
+
+.disabled-button {
+    background-color: #e84855;
+    opacity: 0.7;
+    pointer-events: none;
 }
 
 #num-separator {
