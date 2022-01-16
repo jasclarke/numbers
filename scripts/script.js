@@ -20,6 +20,7 @@ const fastestSetting = document.getElementById('fastest')
 const noviceSetting = document.getElementById('novice')
 const intermediateSetting = document.getElementById('intermediate')
 const expertSetting = document.getElementById('expert')
+const playerName = document.getElementById('player-name')
 const htmlGameBoard = document.getElementById('html-game-board')
 const startGameButton = document.getElementById('start-game-button')
 const settingsButton = document.getElementById('settings-button')
@@ -30,6 +31,7 @@ const settings = document.getElementById('settings')
 const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const game = 'game'
 const playerScore = 'player-score'
+const playerOneName = 'player-one-name'
 const quitButton = 'quit-button'
 const numModalBtn = 'num-modal-btn'
 const numModal = 'num-modal'
@@ -191,6 +193,7 @@ startGameButton.addEventListener('click', () => {
     canvas.classList.remove('remove-page')
     document.getElementById(game).classList.remove('remove-page')
     let config = JSON.parse(localStorage.getItem('settings'))
+    document.getElementById(playerOneName).innerHTML = config.name
     setSpeed(config.speed)
     difficulity = parseInt(config.difficulity)
 })
@@ -203,7 +206,8 @@ settingsButton.addEventListener('click', () => {
 confirmSettingsButton.addEventListener('click', () => {
     let config = {
         speed: getRadioValueByName('hand-speed'),
-        difficulity: getRadioValueByName('ai-guessing-ability')
+        difficulity: getRadioValueByName('ai-guessing-ability'),
+        name: playerName.value
     }
 
     localStorage.setItem('settings', JSON.stringify(config))
@@ -329,13 +333,15 @@ const configureSettings = () => {
     } else {
         settings = {
             speed: 1,
-            difficulity: 0
+            difficulity: 0,
+            name: 'Player 1'
         }
 
         localStorage.setItem('settings', JSON.stringify(settings))
     }
 
     setRadioInputs(settings)
+    playerName.value = settings.name
 }
 
 const setRadioInputs = (settings) => {
