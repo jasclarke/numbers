@@ -235,8 +235,9 @@ confirmSettingsButton.addEventListener('click', () => {
 })
 
 document.addEventListener("visibilitychange", () => {
-    (document.visibilityState === 'visible') ? backgroundMusic.play() : backgroundMusic.pause()
+    (document.visibilityState === 'visible') ? backgroundSound.play() : backgroundSound.pause()
 })
+
 const loadEventListeners = () => {
     document.getElementById(oneBtn).addEventListener('click', () => processTurn(1))
     document.getElementById(twoBtn).addEventListener('click', () => processTurn(2))
