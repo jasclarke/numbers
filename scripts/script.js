@@ -169,7 +169,7 @@ let playerOne = {
 }
 let playerTwo = {
     turn: false,
-    score: 34,
+    score: 0,
     one: 0,
     two: 0,
     three: 0,
