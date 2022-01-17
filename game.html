@@ -1,70 +1,18 @@
 <!DOCTYPE html>
 
-<html lang="en" id="html-game-board" class="orange-background">
+<html html lang="en" id="html-game-board">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Numbers Game</title>
+        <title>Numbers</title>
         <link rel="stylesheet" href="styles/style.css"/>
         <link rel="stylesheet" href="styles/modal.css">
     </head>
 
-    <body>
-        <div class="text-center" id="menu">
-            <h1>Numbers</h1>
-            <p>If you know you know</p>
-            <button class="menu-buttons" id="start-game-button">Start Game</button>
-            <button class="menu-buttons" id="settings-button">Settings</button>
-        </div>
-        
-        <div class="text-center remove-page" id="settings">
-            <h1 id="settings-heading">Numbers</h1>
-
-            <input type="text" class="text-center" id="player-name" placeholder="Your Name"/>
-
-            <h3>Select hand writting speed</h3>
-
-            <form class="settings">
-                <label for="fast">Fast
-                    <input type="radio" name="hand-speed" class="hide-radio" id="fast" value="0"/>
-                    <div class="settings-radio"></div>
-                </label>
-                <label for="faster">Faster
-                    <input type="radio" name="hand-speed" class="hide-radio" id="faster" value="1"/>
-                    <div class="settings-radio"></div>
-                </label>
-                <label for="fastest">Fastest
-                    <input type="radio" name="hand-speed" class="hide-radio" id="fastest" value="2"/>
-                    <div class="settings-radio"></div>
-                </label>
-            </form>
-
-            <h3>Select AI guessing ability</h3>
-
-            <form class="settings">
-                <label for="novice">Novice
-                    <input type="radio" name="ai-guessing-ability" class="hide-radio" id="novice" value="0"/>
-                    <div class="settings-radio"></div>
-                </label>
-                <label for="intermediate">Intermediate
-                    <input type="radio" name="ai-guessing-ability" class="hide-radio" id="intermediate" value="1"/>
-                    <div class="settings-radio"></div>
-                </label>
-                <label for="expert">Expert
-                    <input type="radio" name="ai-guessing-ability" class="hide-radio" id="expert" value="2"/>
-                    <div class="settings-radio"></div>
-                </label>
-            </form>
-
-            <button id="confirm-settings-button" class="regular-button">Confirm</button>
-        </div>
-
-        <div class="text-center remove-page" id="game">
-            <div id="game-indicators">
-                <button id="quit-button">Quit</button>
-                <span id="score-board">Score: <span id="player-score">0</span></span>
-            </div>
+    <body id="body">
+        <div class="text-center">
+            <p id="score-board">Score: <span id="player-score">0</span></p>
             <div id="flex-numbers">
                 <div id="player-one-numbers" class="player-numbers">
                     <span id="player-one-name">Player 1</span>
@@ -97,17 +45,11 @@
 
             <hr id="h-separator"/>
             
+            <canvas id="canvas"></canvas>
             <button id="num-modal-btn">Write Number</button>
             
         </div>
         
-        <!--<button id="sound"></button>-->
-        <div class="modal-container" id="enter-modal">
-            <div class="modal-data">
-                <button id="enter-btn">Enter</button>
-            </div>
-        </div>
-
         <div class="modal-container" id="num-modal">
             <div class="modal-data">
                 <p>Choose a Number</p>
@@ -138,7 +80,8 @@
                 <button id="new-game-btn">Play Again</button>
             </div>
         </div>
-        <canvas class="remove-page" id="canvas"></canvas>
+
+        
         <script src="scripts/script.js"></script>
         <script src="scripts/modal.js"></script>
     </body>

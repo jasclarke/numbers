@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" class="orange-background">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Settings</title>
+        <link rel="stylesheet" href="styles/style.css"/>
+    </head>
+
+    <body>
+        <div class="text-center" id="settings">
+            <h1 id="settings-heading">Numbers</h1>
+
+            <input type="text" class="text-center" id="player-name" placeholder="Your Name"/>
+
+            <h3>Select hand writting speed</h3>
+
+            <form class="settings">
+                <label for="fast">Fast
+                    <input type="radio" name="hand-speed" class="hide-radio" id="fast"/>
+                    <div class="settings-radio"></div>
+                </label>
+                <label for="faster">Faster
+                    <input type="radio" name="hand-speed" class="hide-radio" id="faster"/>
+                    <div class="settings-radio"></div>
+                </label>
+                <label for="fastest">Fastest
+                    <input type="radio" name="hand-speed" class="hide-radio" id="fastest"/>
+                    <div class="settings-radio"></div>
+                </label>
+            </form>
+
+            <h3>Select AI guessing ability</h3>
+
+            <form class="settings">
+                <label for="novice">Novice
+                    <input type="radio" name="ai-guessing-ability" class="hide-radio" id="novice"/>
+                    <div class="settings-radio"></div>
+                </label>
+                <label for="intermediate">Intermediate
+                    <input type="radio" name="ai-guessing-ability" class="hide-radio" id="intermediate"/>
+                    <div class="settings-radio"></div>
+                </label>
+                <label for="expert">Expert
+                    <input type="radio" name="ai-guessing-ability" class="hide-radio" id="expert"/>
+                    <div class="settings-radio"></div>
+                </label>
+            </form>
+
+            <button id="confirm-settings-button" class="regular-button">Confirm</button>
+        </div>
+    </body>
+</html>

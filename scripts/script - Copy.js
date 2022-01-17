@@ -11,13 +11,17 @@ const spriteHeight = 60
 
 const audioContext = new AudioContext()
 
-const writeEffect = new Audio('sounds/write.wav')
 const backgroundSound = new Audio('sounds/background.mp3')
+backgroundSound.autoplay = true
 backgroundSound.loop = true
+
+//const backgoundEffect = audioContext.createMediaElementSource(backgroundSound)
+//backgoundEffect.connect(audioContext.destination)
+
+let confirmSound, negativeSound, successSound, winSound, loseSound, writeSound
 
 const body = document.getElementById('body')
 const closeBtn = document.getElementById('close-btn')
-const enterBtn = document.getElementById('enter-btn')
 const newGameBtn = document.getElementById('new-game-btn')
 const roundDetails = document.getElementById('round-details')
 const gameDetails = document.getElementById('game-details')
@@ -135,7 +139,6 @@ const numberModalHtml = `
     </div>
 </div>`
 
-let confirmSound, negativeSound, successSound, winSound, loseSound, writeSound
 let startXAxis = 225
 let startYAxis = 375
 let xAxis = 0
@@ -169,7 +172,7 @@ let playerOne = {
 }
 let playerTwo = {
     turn: false,
-    score: 34,
+    score: 0,
     one: 0,
     two: 0,
     three: 0,
@@ -190,15 +193,7 @@ closeBtn.addEventListener('click', () => {
     }
 })
 
-newGameBtn.addEventListener('click', () => {
-    backgroundSound.play()
-    newGame()
-})
-
-enterBtn.addEventListener('click', () => {
-    backgroundSound.play()
-    closeModal('enter-modal')
-})
+newGameBtn.addEventListener('click', () => newGame())
 
 startGameButton.addEventListener('click', () => {
     //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
@@ -307,6 +302,7 @@ function retrieveSound(url, key) {
 }
 
 function playSoundEffect(arrayBuffer) {
+    backgroundSound.pause()
     source = audioContext.createBufferSource()
     source.buffer = arrayBuffer
     source.connect(audioContext.destination)
@@ -317,18 +313,15 @@ function newGame() {
     document.getElementById(game).outerHTML = gameHtml
     document.getElementById(numModal).outerHTML = numberModalHtml
     loadEventListeners()
-    closeModal('game-over-modal')
 }
 
 function load() {
+    backgroundSound.play()
     loadEventListeners()
     loadSounds()
     configureSettings()
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
     handImage.onload = () => ctx.drawImage(handImage, xAxis + startXAxis, yAxis + startYAxis, spriteWidth, spriteHeight)
-    setTimeout(() => {
-        openModal('enter-modal')
-    }, 0.01);
 }
 
 const resetScore = () => {
@@ -519,7 +512,8 @@ function disableButtons(buttonList) {
 }
 
 function submitNumber(number) {
-    writeEffect.play()
+    // will change to buttons for each case
+    playSoundEffect(writeSound)
     switch (parseInt(number)) {
         case 1:
             numWord = 'one'
@@ -585,10 +579,9 @@ function writeNumber() {
         requestAnimationFrame(writeNumber) 
     } else if (playerOne.turn) { 
         aiGuessNumber()
-        writeEffect.pause()
-        writeEffect.currentTime = 0
+        writeSound.pause()
     } else {
-        writeEffect.pause()
+        writeSound.pause()
     }
 }
 
@@ -603,7 +596,6 @@ function guessNumber(number) {
             roundDetails.innerHTML = `Better luck next time! <br/> You guessed ${number} and AI wrote ${writtenNum}`
             openModal(roundModal)
         } else {
-            backgroundSound.pause()
             playSoundEffect(loseSound)
             gameDetails.innerHTML = `AI Won. Try Again!`
             openModal(gameOverModal)
@@ -632,8 +624,6 @@ function aiGuessNumber() {
             roundDetails.innerHTML = `<h2>Nicely done!</h2> <p>You wrote ${writtenNum} and AI guessed ${guessedNumber}</p>`
             openModal(roundModal)
         } else {
-            backgroundSound.pause()
-            console.log(backgroundSound.paused)
             playSoundEffect(winSound)
             gameDetails.innerHTML = `Congrats You Won!`
             openModal(gameOverModal)

@@ -214,6 +214,14 @@ button {
     background-color: #ff9505;
 }
 
+#enter-modal .modal-data {
+    background-color: #044389;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #number-btns {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
