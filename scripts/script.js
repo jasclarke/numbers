@@ -135,7 +135,8 @@ const numberModalHtml = `
     </div>
 </div>`
 
-let confirmSound, negativeSound, successSound, winSound, loseSound, writeSound
+let confirmSound, negativeSound, successSound, winSound, loseSound, writeSound, quitSound, keySound, startSound
+let gameStatus = false
 let startXAxis = 225
 let startYAxis = 375
 let xAxis = 0
@@ -183,6 +184,7 @@ let playerTwo = {
 window.selectedNum
 
 closeBtn.addEventListener('click', () => {
+    playSoundEffect(keySound)
     closeModal(roundModal)
     if (playerTwo.turn) {
         writtenNum = educatedGuess(excludedWrittenNumbers, 0)
@@ -191,18 +193,21 @@ closeBtn.addEventListener('click', () => {
 })
 
 newGameBtn.addEventListener('click', () => {
-    backgroundSound.play()
+    playSoundEffect(keySound)
+    playMediaElement(backgroundSound)
     newGame()
 })
 
 enterBtn.addEventListener('click', () => {
-    backgroundSound.play()
+    gameStatus = true
+    playSoundEffect(keySound)
+    playMediaElement(backgroundSound)
     closeModal('enter-modal')
 })
 
 startGameButton.addEventListener('click', () => {
     //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
-    playSoundEffect(confirmSound)
+    playSoundEffect(startSound)
     newGame()
     menu.classList.add('remove-page')
     htmlGameBoard.classList.remove('orange-background')
@@ -235,21 +240,57 @@ confirmSettingsButton.addEventListener('click', () => {
 })
 
 document.addEventListener("visibilitychange", () => {
-    (document.visibilityState === 'visible') ? backgroundSound.play() : backgroundSound.pause()
+    (document.visibilityState === 'visible' && gameStatus === true) ? playMediaElement(backgroundSound) : backgroundSound.pause()
 })
 
 const loadEventListeners = () => {
-    document.getElementById(oneBtn).addEventListener('click', () => processTurn(1))
-    document.getElementById(twoBtn).addEventListener('click', () => processTurn(2))
-    document.getElementById(threeBtn).addEventListener('click', () => processTurn(3))
-    document.getElementById(fourBtn).addEventListener('click', () => processTurn(4))
-    document.getElementById(fiveBtn).addEventListener('click', () => processTurn(5))
-    document.getElementById(sixBtn).addEventListener('click', () => processTurn(6))
-    document.getElementById(sevenBtn).addEventListener('click', () => processTurn(7))
-    document.getElementById(eightBtn).addEventListener('click', () => processTurn(8))
-    document.getElementById(nineBtn).addEventListener('click', () => processTurn(9))
+    document.getElementById(oneBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(1)
+    })
+
+    document.getElementById(twoBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(2)
+    })
+
+    document.getElementById(threeBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(3)
+    })
+
+    document.getElementById(fourBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(4)
+    })
+
+    document.getElementById(fiveBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(5)
+    })
+
+    document.getElementById(sixBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(6)
+    })
+
+    document.getElementById(sevenBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(7)
+    })
+
+    document.getElementById(eightBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(8)
+    })
+
+    document.getElementById(nineBtn).addEventListener('click', () => {
+        playSoundEffect(keySound)
+        processTurn(9)
+    })
 
     document.getElementById('num-modal-btn').addEventListener('click', () => {
+        playSoundEffect(keySound);
         [...document.getElementsByClassName(numBtns)].forEach( btn => btn.removeAttribute('disabled'))
         playerOne.turn ? disableButtons(excludedGuessedNumbers) : disableButtons(excludedWrittenNumbers)
         openModal(numModal)
@@ -257,7 +298,7 @@ const loadEventListeners = () => {
 
     document.getElementById(quitButton).addEventListener('click', () => {
         //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
-        playSoundEffect(negativeSound)
+        playSoundEffect(quitSound)
         document.getElementById(game).classList.add('remove-page')
         canvas.classList.add('remove-page')
         htmlGameBoard.classList.remove('blue-background')
@@ -274,6 +315,9 @@ function loadSounds() {
     retrieveSound('sounds/win.mp3', 3)
     retrieveSound('sounds/lose.mp3', 4)
     retrieveSound('sounds/write.wav', 5)
+    retrieveSound('sounds/start.mp3', 6)
+    retrieveSound('sounds/quit.mp3', 7)
+    retrieveSound('sounds/key.mp3', 8)
 }
 
 function retrieveSound(url, key) {
@@ -301,6 +345,15 @@ function retrieveSound(url, key) {
                 case 5:
                     writeSound = decodedData
                     break;
+                case 6:
+                    startSound = decodedData
+                    break;
+                case 7:
+                    quitSound = decodedData
+                    break;
+                case 8:
+                    keySound = decodedData
+                    break;
                 default:
                     console.log('An error occurred with loading the sounds. Please email the developers')
                     break;
@@ -315,6 +368,10 @@ function playSoundEffect(arrayBuffer) {
     source.buffer = arrayBuffer
     source.connect(audioContext.destination)
     source.start(0)
+}
+
+function playMediaElement(mediaElement) {
+    mediaElement.play().catch( error => console.log(error))
 }
 
 function newGame() {
@@ -593,6 +650,7 @@ function writeNumber() {
         writeEffect.currentTime = 0
     } else {
         writeEffect.pause()
+        writeEffect.currentTime = 0
     }
 }
 
@@ -637,7 +695,6 @@ function aiGuessNumber() {
             openModal(roundModal)
         } else {
             backgroundSound.pause()
-            console.log(backgroundSound.paused)
             playSoundEffect(winSound)
             gameDetails.innerHTML = `Congrats You Won!`
             openModal(gameOverModal)
