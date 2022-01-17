@@ -210,7 +210,7 @@ button {
     margin: 36px 36px 0;
 }
 
-#num-modal .modal-data, #round-modal .modal-data, #game-over-modal .modal-data {
+#num-modal .modal-data, #round-modal .modal-data, #game-over-modal .modal-data, #quit-modal .modal-data {
     background-color: #ff9505;
 }
 
@@ -235,6 +235,14 @@ button {
     top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#confirm-quit-btn {
+    background-color: #e84855;
+}
+
+#cancel-btn {
+    background-color: #8499B1;
 }
 
 #player-one-ones, #player-two-ones {

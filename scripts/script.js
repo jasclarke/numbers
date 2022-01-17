@@ -18,6 +18,8 @@ backgroundSound.loop = true
 const body = document.getElementById('body')
 const closeBtn = document.getElementById('close-btn')
 const enterBtn = document.getElementById('enter-btn')
+const confirmQuitBtn = document.getElementById('confirm-quit-btn')
+const cancelBtn = document.getElementById('cancel-btn')
 const newGameBtn = document.getElementById('new-game-btn')
 const roundDetails = document.getElementById('round-details')
 const gameDetails = document.getElementById('game-details')
@@ -205,6 +207,23 @@ enterBtn.addEventListener('click', () => {
     closeModal('enter-modal')
 })
 
+cancelBtn.addEventListener('click', () => {
+    playSoundEffect(keySound)
+    closeModal('quit-modal')
+})
+
+confirmQuitBtn.addEventListener('click', () => {
+    //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
+    playSoundEffect(quitSound)
+    document.getElementById(game).classList.add('remove-page')
+    canvas.classList.add('remove-page')
+    htmlGameBoard.classList.remove('blue-background')
+    htmlGameBoard.classList.add('orange-background')
+    menu.classList.remove('remove-page')
+    closeModal('quit-modal')
+    resetScore()
+})
+
 startGameButton.addEventListener('click', () => {
     //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
     playSoundEffect(startSound)
@@ -299,12 +318,7 @@ const loadEventListeners = () => {
     document.getElementById(quitButton).addEventListener('click', () => {
         //document.exitFullscreen().then( console.log('Exit Fullscreen')).catch( (error) => console.log(error.message))
         playSoundEffect(quitSound)
-        document.getElementById(game).classList.add('remove-page')
-        canvas.classList.add('remove-page')
-        htmlGameBoard.classList.remove('blue-background')
-        htmlGameBoard.classList.add('orange-background')
-        menu.classList.remove('remove-page')
-        resetScore()
+        openModal('quit-modal')
     })
 }
 

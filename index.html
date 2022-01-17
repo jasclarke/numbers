@@ -8,6 +8,14 @@
         <title>Numbers Game</title>
         <link rel="stylesheet" href="styles/style.css"/>
         <link rel="stylesheet" href="styles/modal.css">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GKHZEVXWR"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1GKHZEVXWR');
+        </script>
     </head>
 
     <body>
@@ -105,6 +113,14 @@
         <div class="modal-container" id="enter-modal">
             <div class="modal-data">
                 <button id="enter-btn">Enter</button>
+            </div>
+        </div>
+
+        <div class="modal-container" id="quit-modal">
+            <div class="modal-data">
+                <p id="orange-modal">Are you sure you want to Quit?</p>
+                <button id="confirm-quit-btn">Yes</button>
+                <button id="cancel-btn">No</button>
             </div>
         </div>
 
