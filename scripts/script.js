@@ -234,6 +234,9 @@ confirmSettingsButton.addEventListener('click', () => {
     menu.classList.remove('remove-page')
 })
 
+document.addEventListener("visibilitychange", () => {
+    (document.visibilityState === 'visible') ? backgroundMusic.play() : backgroundMusic.pause()
+})
 const loadEventListeners = () => {
     document.getElementById(oneBtn).addEventListener('click', () => processTurn(1))
     document.getElementById(twoBtn).addEventListener('click', () => processTurn(2))
