@@ -138,7 +138,7 @@ const numberModalHtml = `
     </div>
 </div>`
 
-let confirmSound, negativeSound, successSound, winSound, loseSound, writeSound, quitSound, keySound, startSound
+let confirmSound, negativeSound, successSound, winSound, loseSound, writeSound, quitSound, keySound, startSound, speedWord, difficulityWord
 let gameStatus = false
 let startXAxis = 225
 let startYAxis = 375
@@ -238,6 +238,8 @@ startGameButton.addEventListener('click', () => {
     document.getElementById(playerOneName).innerHTML = config.name
     setSpeed(config.speed)
     difficulity = parseInt(config.difficulity)
+    difficulityWord = getDifficulityWord(difficulity)
+    speedWord = getSpeedWord()
 })
 
 settingsButton.addEventListener('click', () => {
@@ -466,19 +468,36 @@ function getRadioValueByName(name) {
     return 3
 }
 
+function getDifficulityWord(difficulityValue) {
+    switch (difficulityValue) {
+        case 0:
+            return 'Novice'
+        case 1:
+            return 'Intermediate'
+        case 2:
+            return 'Expert'
+        default:
+            console.log('"Word Difficulity error". Somethig went wrong. Please contact the developers.')
+            return 'Word Difficulity error'
+    }
+}
+
 const setSpeed = (speedValue) => {
     switch (parseInt(speedValue)) {
         case 0:
             speed = 2
             bezierDrawSpeed = 0.05
+            speedWord = 'Fast'
             break
         case 1:
             speed = 5
             bezierDrawSpeed = 0.1
+            speedWord = 'Faster'
             break
         case 2:
             speed = 6
             bezierDrawSpeed = 0.2
+            speedWord = 'Fastest'
             break
         default:
             break;
@@ -694,7 +713,7 @@ function guessNumber(number) {
         } else {
             backgroundSound.pause()
             playSoundEffect(loseSound)
-            gameDetails.innerHTML = `AI Won. Try Again!`
+            gameDetails.innerHTML = `<h2>AI Won! Try Again</h2> <p>Lost By: ${playerTwo.score - playerOne.score} numbers against the AI using the following settings:<ul><li>Hand Writing Speed - ${speedWord}</li><li>Guessing Ability - ${difficulityWord}</li></ul>`
             openModal(gameOverModal)
         }
     } else {
@@ -713,7 +732,7 @@ function aiGuessNumber() {
     if (guessedNumber !== parseInt(writtenNum)) {
         playerOne[numWord] += 1
         playerOne.score += 1
-        document.getElementById(playerScore).innerHTML = playerOne.score
+        document.getElementById(playerScore).innerHTML = playerOne.score - playerTwo.score
         if (playerOne[numWord] === 4) excludedGuessedNumbers.push(writtenNum)
         strikeNumber(1, writtenNum, playerOne[numWord])
         if (playerOne.score !== 35) {
@@ -723,7 +742,7 @@ function aiGuessNumber() {
         } else {
             backgroundSound.pause()
             playSoundEffect(winSound)
-            gameDetails.innerHTML = `Congrats You Won!`
+            gameDetails.innerHTML = `<h2>Congrats You Won!</h2> <p>Won By: ${playerOne.score - playerTwo.score} numbers against the AI using the following settings:<ul><li>Hand Writing Speed - ${speedWord}</li><li>Guessing Ability - ${difficulityWord}</li></ul>`
             openModal(gameOverModal)
         }
     } else {
@@ -831,6 +850,7 @@ function wordToNum(word) {
         case 'nine':
             return 9
         default:
+            console.log('"Word to Num error" Something went wrong. Please email the developers.')
             break;
     }
 }
