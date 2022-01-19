@@ -304,14 +304,23 @@ button {
         font-size: .55rem;
     }
 
-    #instructions-modal .modal-data p {
-    }
-
     input[type="text"],
     input[type="number"],
     input[type="email"],
     input[type="tel"],
     input[type="password"] {
         font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 388px) {
+    #num-modal-btn {
+        font-size: 0.75rem;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    #flex-numbers {
+        font-size: 0.75rem;
     }
 }
