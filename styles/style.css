@@ -294,14 +294,14 @@ button {
     #canvas {
         top: 45%;
     }
+    
+    #instructions-modal .modal-data {
+        width: 80%;
+        font-size: .75rem;
+    }
 
     #h-separator {
         width: 80%;
-    }
-
-    #instructions-modal .modal-data {
-        width: 80%;
-        font-size: .55rem;
     }
 
     input[type="text"],
@@ -316,6 +316,11 @@ button {
 @media only screen and (max-width: 388px) {
     #num-modal-btn {
         font-size: 0.75rem;
+    }
+
+    #instructions-modal .modal-data {
+        width: 80%;
+        font-size: .55rem;
     }
 }
 
