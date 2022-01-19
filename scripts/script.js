@@ -36,6 +36,7 @@ const settingsButton = document.getElementById('settings-button')
 const confirmSettingsButton = document.getElementById('confirm-settings-button')
 const menu = document.getElementById('menu')
 const settings = document.getElementById('settings')
+const instructionsButton = document.getElementById('instructions-button')
 
 const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const game = 'game'
@@ -204,7 +205,7 @@ enterBtn.addEventListener('click', () => {
     gameStatus = true
     playSoundEffect(keySound)
     playMediaElement(backgroundSound)
-    closeModal('enter-modal')
+    closeModal('instructions-modal')
 })
 
 cancelBtn.addEventListener('click', () => {
@@ -240,7 +241,7 @@ startGameButton.addEventListener('click', () => {
 })
 
 settingsButton.addEventListener('click', () => {
-    playSoundEffect(confirmSound)
+    playSoundEffect(keySound)
     menu.classList.add('remove-page')
     settings.classList.remove('remove-page')
 })
@@ -256,6 +257,11 @@ confirmSettingsButton.addEventListener('click', () => {
     localStorage.setItem('settings', JSON.stringify(config))
     settings.classList.add('remove-page')
     menu.classList.remove('remove-page')
+})
+
+instructionsButton.addEventListener('click', () => {
+    playSoundEffect(keySound)
+    openModal('instructions-modal')
 })
 
 document.addEventListener("visibilitychange", () => {
@@ -310,7 +316,12 @@ const loadEventListeners = () => {
 
     document.getElementById('num-modal-btn').addEventListener('click', () => {
         playSoundEffect(keySound);
-        [...document.getElementsByClassName(numBtns)].forEach( btn => btn.removeAttribute('disabled'))
+
+        [...document.getElementsByClassName(numBtns)].forEach( btn => {
+            btn.classList.remove('disabled-button')
+            btn.removeAttribute('disabled')
+        })
+
         playerOne.turn ? disableButtons(excludedGuessedNumbers) : disableButtons(excludedWrittenNumbers)
         openModal(numModal)
     })
@@ -402,7 +413,7 @@ function load() {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
     handImage.onload = () => ctx.drawImage(handImage, xAxis + startXAxis, yAxis + startYAxis, spriteWidth, spriteHeight)
     setTimeout(() => {
-        openModal('enter-modal')
+        openModal('instructions-modal')
     }, 0.01);
 }
 
@@ -672,7 +683,9 @@ function guessNumber(number) {
     if (parseInt(number) !== parseInt(writtenNum)) {
         playerTwo[numWord] += 1
         playerTwo.score += 1
-        if (playerTwo[numWord] === 4) excludedWrittenNumbers.push(writtenNum)
+        if (playerTwo[numWord] === 4) {
+            excludedWrittenNumbers.push(writtenNum)
+        }
         strikeNumber(2, writtenNum, playerTwo[numWord])
         if (playerTwo.score !== 35) {
             playSoundEffect(negativeSound)
@@ -758,14 +771,16 @@ function educatedGuess(excluded, difficulity) {
 }
 
 const setAIProbaility = (excluded, optionsLimit) => {
-    incorrectNumbers = numberList.filter( num => excluded.every( n => parseInt(num) !== parseInt(n))).filter( num => num !== writtenNum)
+    incorrectNumbers = playerOne.turn ? 
+        numberList.filter( num => excluded.every( n => parseInt(num) !== parseInt(n))).filter( num => num !== writtenNum)
+        : numberList.filter( num => excluded.every( n => parseInt(num) !== parseInt(n)))
     shuffledIncorrectNumbers = shuffleArrary(incorrectNumbers)
     
     while (shuffledIncorrectNumbers.length > optionsLimit) {
         shuffledIncorrectNumbers.pop()
     }
 
-    shuffledIncorrectNumbers.push(writtenNum)
+    if (playerOne.turn) shuffledIncorrectNumbers.push(writtenNum)
     return shuffleArrary(shuffledIncorrectNumbers)
 }
 
@@ -787,7 +802,7 @@ function numberOptionsFilter(finalNumbers, score) {
         countdown = score
         return numberOptionsFilter(finalNumbers, score)
     }
-    console.log(numberOptions)
+
     return numberOptions
 }
 
