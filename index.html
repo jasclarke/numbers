@@ -8,6 +8,7 @@
         <title>Numbers Game</title>
         <link rel="stylesheet" href="styles/style.css"/>
         <link rel="stylesheet" href="styles/modal.css">
+        <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GKHZEVXWR"></script>
         <script>
@@ -70,46 +71,7 @@
             <button id="confirm-settings-button" class="regular-button">Confirm</button>
         </div>
 
-        <div class="text-center remove-page" id="game">
-            <div id="game-indicators">
-                <button id="quit-button">Quit</button>
-                <span id="score-board">Score: <span id="player-score">0</span></span>
-            </div>
-            <div id="flex-numbers">
-                <div id="player-one-numbers" class="player-numbers">
-                    <span id="player-one-name">Player 1</span>
-                    <span id="player-one-ones">1111</span>
-                    <span id="player-one-twos">2222</span>
-                    <span id="player-one-threes">3333</span>
-                    <span id="player-one-fours">4444</span>
-                    <span id="player-one-fives">5555</span>
-                    <span id="player-one-sixes">6666</span>
-                    <span id="player-one-sevens">7777</span>
-                    <span id="player-one-eights">8888</span>
-                    <span id="player-one-nines">9999</span>
-                </div>
-                
-                <div id="num-separator"></div>
-
-                <div id="player-two-numbers" class="player-numbers">
-                    <span id="player-two-name">AI</span>
-                    <span id="player-two-ones">1111</span>
-                    <span id="player-two-twos">2222</span>
-                    <span id="player-two-threes">3333</span>
-                    <span id="player-two-fours">4444</span>
-                    <span id="player-two-fives">5555</span>
-                    <span id="player-two-sixes">6666</span>
-                    <span id="player-two-sevens">7777</span>
-                    <span id="player-two-eights">8888</span>
-                    <span id="player-two-nines">9999</span>
-                </div>
-            </div>
-
-            <hr id="h-separator"/>
-            
-            <button id="num-modal-btn">Write Number</button>
-            
-        </div>
+        <div class="text-center remove-page" id="game"></div>
         
         <!--<button id="sound"></button>-->
         <div class="modal-container" id="instructions-modal">
@@ -153,14 +115,14 @@
         </div>
 
         <div class="modal-container" id="round-modal">
-            <div class="modal-data">
+            <div class="modal-data" id="round-modal-data">
                 <div id="round-details"></div>
                 <button id="close-btn">Ok</button>
             </div>
         </div>
 
         <div class="modal-container" id="game-over-modal">
-            <div class="modal-data">
+            <div class="modal-data" id="game-over-modal-data">
                 <div id="game-details"></div>
                 <button id="new-game-btn">Play Again</button>
             </div>

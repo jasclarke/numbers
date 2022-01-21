@@ -37,6 +37,9 @@ const confirmSettingsButton = document.getElementById('confirm-settings-button')
 const menu = document.getElementById('menu')
 const settings = document.getElementById('settings')
 const instructionsButton = document.getElementById('instructions-button')
+const roundModalData = document.getElementById('round-modal-data')
+const gameOverModalData = document.getElementById('game-over-modal-data')
+const gameOverModalElement = document.getElementById('game-over-modal')
 
 const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const game = 'game'
@@ -226,7 +229,6 @@ confirmQuitBtn.addEventListener('click', () => {
 })
 
 startGameButton.addEventListener('click', () => {
-    //menu.requestFullscreen().then( () => console.log('Enter Fullscreen')).catch( (error) => console.log(error.message))
     playSoundEffect(startSound)
     newGame()
     menu.classList.add('remove-page')
@@ -239,7 +241,6 @@ startGameButton.addEventListener('click', () => {
     setSpeed(config.speed)
     difficulity = parseInt(config.difficulity)
     difficulityWord = getDifficulityWord(difficulity)
-    speedWord = getSpeedWord()
 })
 
 settingsButton.addEventListener('click', () => {
@@ -409,7 +410,6 @@ function newGame() {
 }
 
 function load() {
-    loadEventListeners()
     loadSounds()
     configureSettings()
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -723,6 +723,9 @@ function guessNumber(number) {
         document.getElementById(numModalBtn).innerHTML = `Draw Number`
         roundDetails.innerHTML = `<h2>Nicely done!</h2> <p>You guessed ${number} and AI wrote ${writtenNum}</p>`
         openModal(roundModal)
+        party.confetti(roundModalData, {
+            count: party.variation.range(40, 80),
+        })
     } 
 }
 
@@ -739,11 +742,22 @@ function aiGuessNumber() {
             playSoundEffect(successSound)
             roundDetails.innerHTML = `<h2>Nicely done!</h2> <p>You wrote ${writtenNum} and AI guessed ${guessedNumber}</p>`
             openModal(roundModal)
+            party.confetti(roundModalData, {
+                count: party.variation.range(40, 80),
+            })
         } else {
             backgroundSound.pause()
-            playSoundEffect(winSound)
             gameDetails.innerHTML = `<h2>Congrats You Won!</h2> <p>Won By: ${playerOne.score - playerTwo.score} numbers against the AI using the following settings:<ul><li>Hand Writing Speed - ${speedWord}</li><li>Guessing Ability - ${difficulityWord}</li></ul>`
             openModal(gameOverModal)
+            playSoundEffect(winSound)
+            party.confetti(htmlGameBoard, {
+                count: party.variation.range(50, 100),
+                speed: party.variation.range(20, 40),
+            })
+            party.sparkles(gameOverModalData, {
+                count: party.variation.range(30, 40),
+                speed: party.variation.range(40, 80),
+            })
         }
     } else {
         playSoundEffect(negativeSound)
@@ -1218,5 +1232,4 @@ function one() {
     return false
 }
 
-//body.requestFullscreen().then( () => console.log('fullscreen')).catch( (error) => console.log(error.message))
 load()
