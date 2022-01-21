@@ -163,7 +163,7 @@ let disabledWrittingButtons = []
 let countdown = 4
 let playerOne = {
     turn: true,
-    score: 0,
+    score: 34,
     one: 0,
     two: 0,
     three: 0,
@@ -191,6 +191,7 @@ window.selectedNum
 
 closeBtn.addEventListener('click', () => {
     playSoundEffect(keySound)
+    roundModalData.classList.remove('shake')
     closeModal(roundModal)
     if (playerTwo.turn) {
         writtenNum = educatedGuess(excludedWrittenNumbers, 0)
@@ -201,6 +202,7 @@ closeBtn.addEventListener('click', () => {
 newGameBtn.addEventListener('click', () => {
     playSoundEffect(keySound)
     playMediaElement(backgroundSound)
+    gameOverModalData.classList.remove('extra-shake')
     newGame()
 })
 
@@ -710,11 +712,13 @@ function guessNumber(number) {
             playSoundEffect(negativeSound)
             roundDetails.innerHTML = `Better luck next time! <br/> You guessed ${number} and AI wrote ${writtenNum}`
             openModal(roundModal)
+            roundModalData.classList.add('shake')
         } else {
             backgroundSound.pause()
             playSoundEffect(loseSound)
             gameDetails.innerHTML = `<h2>AI Won! Try Again</h2> <p>Lost By: ${playerTwo.score - playerOne.score} numbers against the AI using the following settings:<ul><li>Hand Writing Speed - ${speedWord}</li><li>Guessing Ability - ${difficulityWord}</li></ul>`
             openModal(gameOverModal)
+            gameOverModalData.classList.add('extra-shake')
         }
     } else {
         playSoundEffect(successSound)
@@ -766,6 +770,7 @@ function aiGuessNumber() {
         document.getElementById(numModalBtn).innerHTML = `Guess Number`
         roundDetails.innerHTML = `Yikes! <br/> You wrote ${writtenNum} and AI guessed ${guessedNumber}`
         openModal(roundModal)
+        roundModalData.classList.add('shake')
     }
 }
 
