@@ -163,7 +163,7 @@ let disabledWrittingButtons = []
 let countdown = 4
 let playerOne = {
     turn: true,
-    score: 34,
+    score: 0,
     one: 0,
     two: 0,
     three: 0,
