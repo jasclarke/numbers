@@ -191,10 +191,6 @@ button {
     margin-top: 10px;
 }
 
-.player-numbers span:not(#player-one-name, #player-two-name) {
-    letter-spacing: 5px;
-}
-
 .disabled-button {
     background-color: #e84855;
     opacity: 0.7;
@@ -259,6 +255,10 @@ button {
 }
 
 #player-one-threes, #player-two-threes {
+    letter-spacing: 6px !important;
+}
+
+#player-one-fours, #player-two-fours {
     letter-spacing: 6px !important;
 }
 
